@@ -1,0 +1,640 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>كتالوج مصر الدولية</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap">
+<style>
+/* Layout: nav over a split hero (text + factory/wheat photo) -> four group tiles -> sticky search/tabs -> category sections of photo cards -> about band -> contact footer; detail sheet and inquiry list are overlays */
+:root{
+  --font:'Tajawal','Segoe UI',Tahoma,Arial,sans-serif;
+  /* dark-first palette */
+  --bg:#0f1a14;
+  --bg-2:#14231a;
+  --surface:#1a2b21;
+  --surface-2:#223729;
+  --line:rgba(217,185,107,.2);
+  --fg:#eef0e8;
+  --muted:#a9b7a6;
+  --gold:#d9b96b;
+  --btn-bg:#d9b96b;
+  --btn-fg:#1a190e;
+  --plate:#f1f4ed;
+  --g-npk:#86c850;
+  --g-nutri:#d9b96b;
+  --g-bio:#5fbdad;
+  --g-pest:#e0875f;
+  --hero-a:#16271d;
+  --hero-b:#0b140f;
+  --hero-fg:#f4f2e8;
+  --hero-gold:#dcbc6e;
+  --hero-leaf:#86c850;
+  --shadow:0 20px 50px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#f0f3ea;--bg-2:#e6ece0;--surface:#ffffff;--surface-2:#e8eee2;--line:rgba(28,62,38,.16);
+    --fg:#16261b;--muted:#4c5f4e;--gold:#7d5c1b;--btn-bg:#1f4a2c;--btn-fg:#f6f4ea;--plate:#f4f6f0;
+    --g-npk:#3b781c;--g-nutri:#7d5c1b;--g-bio:#1b756a;--g-pest:#ae4a24;
+    --shadow:0 20px 50px rgba(18,40,24,.2);
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f0f3ea;--bg-2:#e6ece0;--surface:#ffffff;--surface-2:#e8eee2;--line:rgba(28,62,38,.16);
+  --fg:#16261b;--muted:#4c5f4e;--gold:#7d5c1b;--btn-bg:#1f4a2c;--btn-fg:#f6f4ea;--plate:#f4f6f0;
+  --g-npk:#3b781c;--g-nutri:#7d5c1b;--g-bio:#1b756a;--g-pest:#ae4a24;
+  --shadow:0 20px 50px rgba(18,40,24,.2);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{direction:rtl;margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.7;font-weight:400}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit;cursor:pointer}
+img{display:block}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--btn-bg);background:var(--btn-bg);color:var(--btn-fg);border-radius:10px;padding:11px 22px;font-weight:700;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.on-dark{background:var(--hero-gold);border-color:var(--hero-gold);color:#16200f}
+.btn.ghost.on-dark{background:transparent;color:var(--hero-fg);border-color:rgba(244,242,232,.4)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--hero-a),var(--hero-b));color:var(--hero-fg)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;border-bottom:1px solid rgba(220,188,110,.2)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand img{height:44px;width:auto}
+.brand b{display:block;font-weight:800;font-size:1.05rem;line-height:1.2}
+.brand small{display:block;font-size:.68rem;letter-spacing:.3em;color:var(--hero-gold);direction:ltr;text-align:right}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a,.nav-links button{color:var(--hero-fg);text-decoration:none;font-size:.95rem;font-weight:500;padding:8px 12px;border-radius:8px;border:0;background:transparent}
+.nav-links a:hover,.nav-links button:hover{background:rgba(255,255,255,.08)}
+.nav-links .icon{width:38px;height:38px;padding:0;display:grid;place-items:center;border:1px solid rgba(244,242,232,.25);border-radius:50%}
+.nav-links svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(32px,5vw,64px) clamp(36px,5vw,64px)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.9rem;font-weight:500;color:var(--hero-gold);letter-spacing:.02em}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--hero-gold)}
+.hero h1{margin:10px 0 0;font-weight:900;font-size:clamp(2.2rem,5.2vw,4rem);line-height:1.18;text-wrap:balance}
+.hero h1 span{color:var(--hero-gold)}
+.lede{margin:16px 0 0;max-width:56ch;color:rgba(244,242,232,.84);font-size:1.08rem;line-height:1.85}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.stats{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(220,188,110,.25)}
+.stat b{display:block;font-weight:900;font-size:2.2rem;line-height:1.1;color:var(--hero-gold);font-variant-numeric:tabular-nums}
+.stat span{font-size:.9rem;color:rgba(244,242,232,.75)}
+.hero-photo{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(220,188,110,.3);aspect-ratio:4/5;max-height:560px;width:100%;justify-self:end;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.hero-photo img.ph{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero-photo::after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(to top,rgba(8,14,10,.88),transparent)}
+.hero-photo .emb{position:absolute;z-index:2;inset-inline-start:18px;bottom:16px;width:min(150px,38%);height:auto}
+
+/* group tiles */
+.groups{padding-block:44px 8px}
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sec-title h2{margin:0;font-weight:800;font-size:clamp(1.5rem,3vw,2rem)}
+.sec-title p{margin:0;color:var(--muted);font-size:.95rem}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tile{position:relative;display:flex;flex-direction:column;gap:12px;text-align:start;padding:16px;border-radius:14px;background:var(--surface);border:1px solid var(--line);overflow:hidden;min-height:250px;transition:border-color .15s ease,transform .15s ease}
+.tile:hover{border-color:var(--ac);transform:translateY(-2px)}
+.tile .collage{position:relative;height:122px;border-radius:10px;background:var(--plate);display:flex;align-items:flex-end;justify-content:center;gap:0;padding:8px 6px 0;overflow:hidden}
+.tile .collage img{height:100%;width:auto;max-width:36%;object-fit:contain;margin-inline:-5px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25))}
+.tile .collage img:nth-child(2){height:112%;z-index:2}
+.tile h3{margin:0;font-weight:800;font-size:1.2rem}
+.tile p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.6}
+.tile .n{margin-top:auto;display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--ac);font-weight:700}
+.tile .n::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ac)}
+
+/* toolbar */
+.toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin-top:30px}
+.toolbar .wrap{padding-block:12px;display:grid;gap:10px}
+.search{position:relative}
+.search input{width:100%;height:50px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;padding-inline:46px 14px}
+.search input::placeholder{color:var(--muted)}
+.search svg{position:absolute;inset-inline-start:15px;top:50%;transform:translateY(-50%);width:19px;height:19px;stroke:var(--muted);fill:none;stroke-width:2}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:thin}
+.tab{flex:none;border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 16px;font-size:.95rem;font-weight:500;white-space:nowrap}
+.tab small{color:var(--muted);margin-inline-start:6px;font-variant-numeric:tabular-nums}
+.tab[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-fg);border-color:var(--btn-bg)}
+.tab[aria-pressed="true"] small{color:inherit;opacity:.8}
+
+/* products */
+main{padding-block:32px 72px;scroll-margin-top:140px}
+.cat{margin-bottom:46px}
+.cat-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.cat-head h2{margin:0;font-weight:800;font-size:1.5rem}
+.cat-head span{color:var(--muted);font-size:.92rem;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;min-width:0;border-radius:14px;background:var(--surface);border:1px solid var(--line);cursor:pointer;overflow:hidden;transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease}
+.card:hover{border-color:var(--ac);transform:translateY(-3px);box-shadow:var(--shadow)}
+.plate{position:relative;height:216px;background:var(--plate);display:flex;align-items:center;justify-content:center;padding:14px}
+.plate img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain}
+.badge{position:absolute;top:10px;inset-inline-end:10px;direction:ltr;font-weight:800;font-size:.92rem;letter-spacing:.02em;padding:3px 10px;border-radius:8px;background:#14231a;color:#e7c876;font-variant-numeric:tabular-nums}
+.origin{position:absolute;top:10px;inset-inline-start:10px;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:8px;background:#14231a;color:#f0d9a1}
+.cbody{display:flex;flex-direction:column;gap:7px;padding:14px 16px 16px;flex:1}
+.cbody .top{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ac);flex:none}
+.cbody h3{margin:0;font-weight:800;font-size:1.3rem;line-height:1.3}
+.en{font-size:.8rem;letter-spacing:.05em;color:var(--muted);direction:ltr;text-align:right;margin-top:-4px}
+.desc{margin:0;color:var(--muted);font-size:.92rem;line-height:1.65;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rows{display:grid;gap:7px;margin-top:2px}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;font-size:.88rem}
+.row .v{font-weight:700;font-variant-numeric:tabular-nums}
+.bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--ac)}
+.npkline{display:flex;gap:8px;margin-top:2px}
+.npkline div{flex:1;text-align:center;padding:5px 0;border-radius:8px;background:var(--surface-2);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.25}
+.npkline small{display:block;font-weight:500;font-size:.7rem;color:var(--muted);letter-spacing:.12em}
+.foot{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.size{font-size:.78rem;font-weight:500;padding:2px 9px;border-radius:6px;background:var(--surface-2);font-variant-numeric:tabular-nums}
+.ac-npk{--ac:var(--g-npk)}.ac-nutri{--ac:var(--g-nutri)}.ac-bio{--ac:var(--g-bio)}.ac-pest{--ac:var(--g-pest)}
+.empty{padding:56px 0;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--fg);font-size:1.2rem;margin-bottom:6px}
+
+/* about */
+.about{background:linear-gradient(160deg,var(--hero-a),var(--hero-b));color:var(--hero-fg);border-top:1px solid rgba(220,188,110,.25)}
+.about .wrap{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,64px);align-items:center;padding-block:clamp(40px,6vw,76px)}
+.about h2{margin:0 0 12px;font-weight:900;font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.3;color:var(--hero-gold);text-wrap:balance}
+.about p{margin:0 0 12px;color:rgba(244,242,232,.84);line-height:1.9;max-width:62ch}
+.about .emb{justify-self:center;width:min(300px,70%);height:auto}
+.motto{display:flex;flex-wrap:wrap;gap:6px 26px;margin-top:18px;font-weight:800;font-size:1.3rem;color:var(--hero-leaf)}
+
+/* footer */
+footer{background:var(--hero-b);color:var(--hero-fg);border-top:1px solid rgba(220,188,110,.25)}
+footer .wrap{padding-block:40px 48px;display:grid;gap:26px}
+.foot-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.foot-top img{height:84px;width:auto;max-width:100%}
+footer h2{margin:0;font-weight:800;font-size:1.4rem;color:var(--hero-gold)}
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px 28px}
+.contact div{min-width:0}
+.contact small{display:block;color:rgba(244,242,232,.6);font-size:.82rem}
+.contact span,.contact a{color:var(--hero-fg);overflow-wrap:anywhere}
+.contact a{text-decoration-color:var(--hero-gold);text-underline-offset:3px}
+.legal{font-size:.86rem;color:rgba(244,242,232,.6)}
+
+/* overlays */
+.ov{position:fixed;inset:0;z-index:40;background:rgba(5,10,7,.7);display:flex;align-items:center;justify-content:center;padding:16px}
+.sheet{position:relative;width:min(940px,100%);max-height:min(92dvh,900px);overflow-y:auto;background:var(--bg);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.sheet.narrow{width:min(560px,100%);grid-template-columns:1fr}
+.sheet .plate-big{background:var(--plate);display:flex;align-items:center;justify-content:center;padding:28px;min-height:300px;position:sticky;top:0;align-self:start;height:min(92dvh,900px);border-radius:0 18px 18px 0}
+.sheet .plate-big img{max-width:100%;max-height:min(70dvh,560px);width:auto;height:auto;object-fit:contain}
+.sheet .info{display:grid;gap:14px;padding:26px 26px 28px;align-content:start;min-width:0}
+.x{position:absolute;z-index:3;top:12px;inset-inline-start:12px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:1.25rem;line-height:1}
+.sheet h2{margin:0;font-weight:900;font-size:2rem;line-height:1.25}
+.sheet h4{margin:6px 0 0;font-weight:800;font-size:1.05rem;color:var(--ac,var(--gold))}
+.meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:.88rem;color:var(--muted)}
+.sheet .lead{margin:0;line-height:1.85}
+.bigf{direction:ltr;text-align:right;font-weight:900;font-size:2.4rem;line-height:1.1;color:var(--ac);font-variant-numeric:tabular-nums}
+.tbl{display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.tr{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.tr:last-child{border-bottom:0}
+.tr .v{font-weight:700;font-variant-numeric:tabular-nums;text-align:left;direction:ltr}
+.tr .bar{margin-top:3px}
+.notes{display:grid;gap:4px;padding:10px 14px;border-radius:10px;background:var(--surface-2);font-size:.92rem}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.fab{position:fixed;z-index:25;inset-inline-end:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;border-radius:999px;padding:11px 20px;border:1px solid var(--btn-bg);background:var(--btn-bg);color:var(--btn-fg);font-weight:700;box-shadow:var(--shadow)}
+.fab em{font-style:normal;min-width:24px;height:24px;border-radius:12px;display:grid;place-items:center;background:var(--btn-fg);color:var(--btn-bg);font-size:.85rem;font-variant-numeric:tabular-nums}
+.qlist{display:grid;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+.qitem{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.qitem:last-child{border-bottom:0}
+.qitem small{color:var(--muted)}
+.qitem button{border:0;background:transparent;color:var(--muted);font-size:1.1rem;padding:4px 8px}
+textarea{width:100%;min-height:150px;resize:vertical;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-size:.92rem;padding:10px 12px}
+.hint{font-size:.86rem;color:var(--muted);min-height:1.4em}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-photo{aspect-ratio:16/11;max-height:340px;justify-self:stretch}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about .wrap{grid-template-columns:1fr}
+  .nav-links .hide-s{display:none}
+}
+@media (max-width:720px){
+  .sheet{grid-template-columns:1fr}
+  .sheet .plate-big{position:relative;height:auto;min-height:0;padding:44px 20px 20px;border-radius:18px 18px 0 0}
+  .sheet .plate-big img{max-height:260px}
+}
+@media (max-width:560px){
+  .ov{align-items:flex-end;padding:0}
+  .sheet{border-radius:18px 18px 0 0;max-height:94dvh}
+  .sheet .info{padding-bottom:calc(28px + env(safe-area-inset-bottom,0px))}
+  .grid{grid-template-columns:1fr}
+  .tiles{grid-template-columns:1fr}
+  .tile{min-height:0}
+  .brand b{font-size:.95rem}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.tile{transition:none}.card:hover,.tile:hover{transform:none}}
+</style>
+
+<div dir="rtl" lang="ar">
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="التنقل الرئيسي">
+      <div class="brand">
+        <img src="logo-mark.png" alt="شعار مصر الدولية" width="68" height="44">
+        <div><b>مصر الدولية</b><small>MISR EL DAWLIYA</small></div>
+      </div>
+      <div class="nav-links">
+        <a class="hide-s" href="#products" data-go="main">المنتجات</a>
+        <a class="hide-s" href="#about" data-go="about">عن الشركة</a>
+        <a class="hide-s" href="#contact" data-go="contact">تواصل معنا</a>
+        <button class="icon" id="theme" type="button" aria-label="تبديل الوضع الفاتح والداكن"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      </div>
+    </nav>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">كتالوج المنتجات</span>
+        <h1>مصر الدولية <span>للتنمية الزراعية والصناعية</span></h1>
+        <p class="lede">على مدار أكثر من ثلاثة عقود، رسخت الشركة مكانتها كأحد الأسماء الموثوقة في القطاع الزراعي، بحلول تجمع بين الجودة والابتكار والدعم الفني، وتضع احتياجات المزارع في مقدمة أولوياتها.</p>
+        <div class="cta">
+          <a class="btn on-dark" href="#products" data-go="main">تصفح المنتجات</a>
+          <a class="btn ghost on-dark" href="#contact" data-go="contact">تواصل معنا</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="statProducts">69</b><span>منتجاً</span></div>
+          <div class="stat"><b id="statCats">19</b><span>تصنيفاً</span></div>
+          <div class="stat"><b>30</b><span>سنة من الخبرة الزراعية</span></div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img class="ph" src="hero.jpg" alt="مصنع مصر الدولية وسط حقول القمح عند الغروب" width="820" height="1366">
+        <img class="emb" src="emblem30.png" alt="30 سنة من الابتكار الزراعي: تاريخ من ذهب" width="216" height="220">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="groups" aria-labelledby="gt">
+  <div class="wrap">
+    <div class="sec-title"><h2 id="gt">تصفح حسب المجموعة</h2><p>اختر مجموعة لعرض منتجاتها</p></div>
+    <div class="tiles" id="tiles"></div>
+  </div>
+</section>
+
+<div class="toolbar" id="toolbar">
+  <div class="wrap">
+    <div class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" autocomplete="off" placeholder="ابحث باسم المنتج أو العنصر، مثل: بوتاسيوم، كالسيوم، 19-19-19" aria-label="بحث في المنتجات">
+    </div>
+    <div class="tabs" id="tabs" role="group" aria-label="مجموعات المنتجات"></div>
+  </div>
+</div>
+
+<main class="wrap" id="main" aria-live="polite"></main>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div>
+      <h2>رؤية متجددة، وإدارة شابة تقود مستقبل الزراعة</h2>
+      <p>تقدم مصر الدولية للتنمية الزراعية والصناعية حلولاً متكاملة تجمع بين الجودة والابتكار والدعم الفني، وتضع احتياجات المزارع في مقدمة أولوياتها.</p>
+      <p>تؤمن الشركة بأن التطوير المستمر هو أساس النجاح، فتعمل على تطوير منتجاتها وخدماتها والاستثمار في الكفاءات، وتعزز التواصل مع العملاء وتنظم الندوات العلمية وتشارك في الفعاليات الزراعية، إيماناً بأن المعرفة هي الطريق إلى إنتاجية أعلى وزراعة أكثر استدامة.</p>
+      <div class="motto"><span>نُنتج</span><span>نُبدع</span><span>نتألق</span></div>
+    </div>
+    <img class="emb" src="emblem30.png" alt="تاريخ من ذهب، من 30 سنة" width="216" height="220" loading="lazy">
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-top">
+      <img src="logo.png" alt="مصر الدولية للتنمية الزراعية والصناعية" width="102" height="84" loading="lazy">
+      <button class="btn ghost on-dark" type="button" id="toTop">العودة للأعلى</button>
+    </div>
+    <h2>تواصل مع مصر الدولية</h2>
+    <div class="contact">
+      <div><small>الإدارة والمصانع</small><span>قويسنا، منطقة قويسنا الصناعية، المنطقة الثانية</span></div>
+      <div><small>تليفون</small><span class="ltr">+2 048 25 90 903</span></div>
+      <div><small>فاكس</small><span class="ltr">+2 048 25 90 904</span></div>
+      <div><small>البريد الإلكتروني</small><span class="ltr">a3.misr.eldawlya@gmail.com</span></div>
+      <div><small>الموقع</small><a class="ltr" href="https://www.misreldawlya.com" target="_blank" rel="noopener">www.misreldawlya.com</a></div>
+    </div>
+    <div class="legal">تاريخ من ذهب .. من 30 سنة. معدلات الاستخدام الواردة استرشادية، ويُنصح بمراجعة المهندس الزراعي قبل التطبيق.</div>
+  </div>
+</footer>
+</div>
+
+<button class="fab" id="fab" type="button" hidden>قائمة الاستفسار <em id="fabN">0</em></button>
+<div class="ov" id="ov" hidden></div>
+
+<script>
+(function(){
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var sz=function(){return Array.prototype.slice.call(arguments).map(function(x){return x.replace('KG',' كجم').replace('GM',' جم').replace('LITER',' لتر').replace('CM',' سم³')})};
+var npk=function(n,p,k,x){return [['نيتروجين N',n+'%'],['فوسفور P',p+'%'],['بوتاسيوم K',k+'%']].concat(x||[])};
+
+var GROUPS=[
+  {id:'all',n:'الكل'},
+  {id:'npk',n:'أسمدة N.P.K',d:'بودر ومعلق وورقي، بتركيبات متوازنة وعالية البوتاسيوم.',col:['gardenia','multysoul','floura']},
+  {id:'nutri',n:'التغذية والعناصر',d:'عناصر صغرى وأحماض أمينية ومركبات الكالسيوم والبوتاسيوم والفوسفور.',col:['aminoat','calpure','justfeed']},
+  {id:'bio',n:'المنشطات والمنظمات',d:'منشطات الجذور ومنظمات النمو والتزهير ومعالجات الملوحة.',col:['humogold','melga','supersal']},
+  {id:'pest',n:'المبيدات',d:'مبيدات فطرية ونحاسية وحشرية ونيماتودية.',col:['mildur','noflies','nematrol']}
+];
+var CATS=[
+  {id:'npkp',g:'npk',n:'N.P.K بودر'},
+  {id:'npks',g:'npk',n:'N.P.K معلق'},
+  {id:'hik',g:'npk',n:'N.P.K عالية البوتاسيوم'},
+  {id:'foliar',g:'npk',n:'N.P.K للأسمدة الورقية'},
+  {id:'micro',g:'nutri',n:'عناصر صغرى'},
+  {id:'amino',g:'nutri',n:'أحماض أمينية'},
+  {id:'gen',g:'nutri',n:'مغذيات عامة'},
+  {id:'phos',g:'nutri',n:'مركبات الفوسفور'},
+  {id:'calc',g:'nutri',n:'مركبات الكالسيوم'},
+  {id:'pot',g:'nutri',n:'مركبات البوتاسيوم'},
+  {id:'nit',g:'nutri',n:'نترات البوتاسيوم والكالسيوم'},
+  {id:'root',g:'bio',n:'منشطات الجذور'},
+  {id:'flow',g:'bio',n:'مركبات التزهير ومنظمات النمو'},
+  {id:'algae',g:'bio',n:'طحالب بحرية'},
+  {id:'sal',g:'bio',n:'معالجات الملوحة'},
+  {id:'cu',g:'pest',n:'مركبات فطرية نحاسية'},
+  {id:'imp',g:'pest',n:'مبيدات فطرية مستوردة'},
+  {id:'ins',g:'pest',n:'مبيدات حشرية'},
+  {id:'nem',g:'pest',n:'مبيدات نيماتودية'}
+];
+
+var R1=[['ري تنقيط','2 - 3 كجم / فدان'],['ري غمر','5 - 7 كجم / فدان']];
+var RSUSP=function(a,b){return [['ري تنقيط',a+' كجم / فدان'],['ري غمر',b+' كجم / فدان'],['رش ورقي','250 - 500 جم / 100 لتر ماء']]};
+var SAL=[['أكسيد كالسيوم','12%'],['سيتريك أسيد','10%'],['أحماض أمينية حرة','6%'],['سابونين','1%'],['بورون','0.1%'],['أحماض كربوكسيلية','يحتوي']];
+var FOLIAR=[['رش ورقي','1 كجم / 600 لتر ماء']];
+
+var P=[
+/* N.P.K بودر */
+{c:'npkp',im:'gardenia',n:'جاردينيا',e:'Gardenia',f:'19-19-19',d:'سماد متوازن NPK مثالي للنمو الشامل والتغذية المتكاملة طوال الموسم.',k:npk(19,19,19),u:R1,s:sz('25KG','5KG')},
+{c:'npkp',im:'floura',n:'فلورا-K',e:'Floura-K',f:'6-6-43',d:'سماد غني بالبوتاسيوم مصمم لتحسين اللون والطعم والصلابة للتخزين.',k:npk(6,6,43),u:R1,s:sz('25KG','5KG')},
+{c:'npkp',im:'multysoul',n:'مالتي سول',e:'Multysoul',f:'12-5-43',d:'سماد عالي البوتاسيوم لتحسين جودة التزهير والعقد.',k:npk(12,5,43),u:R1,s:sz('25KG','5KG')},
+{c:'npkp',im:'highgrowth_p',n:'هاي جروث',e:'High Growth',f:'10-5-40',d:'سماد عالي البوتاسيوم يسرع النمو ويزيد الإنتاجية في المراحل الحرجة.',k:npk(10,5,40),u:R1,s:sz('25KG')},
+{c:'npkp',im:'active',n:'أكتف',e:'Active',f:'5-0-45',d:'سماد بوتاسيوم مركز يقوي النبات ويحسن مقاومته للإجهاد البيئي.',t:['نقي','عالي التركيز','تام الذوبان في الماء'],k:npk(5,0,45),u:R1,s:sz('20KG','5KG')},
+{c:'npkp',im:'areafeed',n:'ايريافيد',e:'Area-Feed',f:'12-12-36 +1Fe',d:'تركيبة NPK عالية البوتاسيوم مدعمة بحديد مخلبي لتعزيز كفاءة التغذية وجودة الإنتاج.',k:npk(12,12,36,[['حديد Fe','1%']]),u:[['ري تنقيط','3 - 4 كجم / فدان'],['ري غمر','6 - 8 كجم / فدان']],s:sz('10KG')},
+{c:'npkp',im:'mapford',n:'ماب فورد',e:'Map Ford',f:'12-61-0',d:'سماد فوسفوري عالي التركيز يحفز نمو الجذور والإزهار المبكر.',t:['عالي الفوسفور 61%'],k:npk(12,61,0),u:R1,s:sz('25KG','5KG')},
+{c:'npkp',im:'bigsoul',n:'بج سول',e:'Big Soul',f:'0-0-50',d:'سماد بوتاسيوم نقي 50% لتعزيز العقد وزيادة وزن وصلابة الثمار.',t:['نقي','عالي التركيز','تام الذوبان في الماء'],k:[['بوتاسيوم K','50%']],u:[['مع الخدمة','25 - 50 كجم / فدان'],['تسميد أرضي','5 - 10 كجم / فدان']],x:['الجرعة حسب طريقة الري'],s:sz('25KG')},
+/* N.P.K معلق */
+{c:'npks',im:'ecoforce',n:'ايكو فورس',f:'24-24-24',d:'معلق مركز بنسب متوازنة من NPK لتحسين النمو في جميع مراحله وتحسين العقد والتزهير ورفع كفاءة التحجيم.',k:npk(24,24,24),u:RSUSP('2 - 4','4 - 6'),s:sz('20KG','5KG','1KG')},
+{c:'npks',im:'phosforce',n:'فوسفو فورس',f:'12-50-12',d:'معلق مركز عالي الفوسفور لتحفيز التجذير ورفع كفاءة العقد والتزهير وإمداد النبات بالطاقة لإتمام العمليات الحيوية.',k:npk(12,50,12),u:RSUSP('2 - 3','4 - 6'),s:sz('20KG','5KG','1KG')},
+{c:'npks',im:'potaforce',n:'بوتا فورس',f:'6-6-60',d:'معلق مركز عالي البوتاسيوم لتحجيم مثالي وثمار ذات جودة عالية وطعم مميز وزيادة في الإنتاج والقيمة التسويقية.',k:npk(6,6,60),u:RSUSP('2 - 4','5 - 8'),s:sz('20KG','5KG','1KG')},
+/* N.P.K عالية البوتاسيوم */
+{c:'hik',im:'flora',n:'فلوراك',e:'Flora',f:'6-6-43',d:'غني بالبوتاسيوم لتعزيز جودة الثمار وصلابتها، يرفع نسبة السكر ويحسن التلوين.',a:'منشطات نمو وأحماض أمينية حرة',k:npk(6,6,43),u:[['رش ورقي','1 كجم / 400 - 600 لتر ماء']],s:sz('1KG')},
+{c:'hik',im:'highgrowth_k',n:'هاي جروث',e:'High Growth',d:'سماد نترات بوتاسيوم يعمل على تحسين النمو وزيادة كفاءة التحجيم.',a:'منشطات نمو وأحماض أمينية حرة',k:[['نيتروجين','10%'],['فوسفور','5%'],['بوتاسيوم','40%'],['حديد','0.3%'],['زنك','0.2%'],['منجنيز','0.1%'],['المادة المخلبية','3%'],['كبريت','4.3%']],u:[['رش ورقي','1 كجم / 400 - 600 لتر ماء']],s:sz('500GM')},
+/* N.P.K ورقية */
+{c:'foliar',im:'goldfeed',n:'جولد فيد',e:'Gold Feed',f:'19-19-19',d:'NPK متوازن لتحسين النمو الخضري والزهري، مناسب لجميع مراحل النبات.',k:npk(19,19,19),u:FOLIAR,s:sz('500GM')},
+{c:'foliar',im:'goldplant',n:'جولد بلانت',e:'Gold Plant',f:'20-20-20',d:'NPK متوازن بقوة لتحسين النمو العام، يرفع كفاءة التمثيل الغذائي للنبات.',k:npk(20,20,20),u:FOLIAR,s:sz('500GM')},
+{c:'foliar',im:'sengral',n:'سينجرال',e:'Sengral',f:'20-20-20',d:'تركيبة عالية الجودة لتعزيز نمو المحاصيل والمجموع الخضري، تساعد على زيادة الإنتاجية وجودة الثمار.',k:npk(20,20,20),u:FOLIAR,s:sz('1KG')},
+/* عناصر صغرى */
+{c:'micro',im:'izm',n:'حديد - زنك - منجنيز',d:'عناصر صغرى مخلبية لتحسين النمو واتمام العمليات الحيوية وتنشيط الإنزيمات وإعادة الحيوية للنبات.',k:[['حديد مخلبي EDTA','12%'],['زنك مخلبي EDTA','13%'],['منجنيز مخلبي EDTA','13%']],u:[['رش ورقي','1 كجم / 600 لتر ماء'],['تسميد أرضي','1 - 2 كجم / فدان']],s:sz('1KG','500GM','100GM')},
+{c:'micro',im:'biocare',n:'بايو كير ميكس',e:'Bio Care Mix',d:'خليط عناصر صغرى متكامل لتحسين صحة النبات ودعم النمو في جميع المراحل.',a:'أحماض أمينية، منشطات نمو ومضادات للإجهاد',k:[['حديد','4%'],['زنك','4%'],['منجنيز','4%'],['ماغنسيوم','2%'],['مادة مخلبية EDTA','60%']],u:[['رش ورقي','1 كجم / 600 لتر ماء'],['تسميد أرضي','1 - 2 كجم / فدان']],s:sz('1KG','500GM','100GM')},
+{c:'micro',im:'growforce',n:'جرو فورس',e:'Grow Force',d:'تركيبة فعالة من الحديد والماغنسيوم لرفع كفاءة العمليات الحيوية وتحسين النمو الخضري وعلاج الاصفرار سريعاً.',k:[['حديد مخلبي','8%'],['ماغنسيوم','8%'],['حمض ستريك','3%']],u:[['ري تنقيط','1 كجم / فدان'],['ري غمر','2 كجم / فدان']],s:sz('1KG','500GM')},
+{c:'micro',im:'zinc8',n:'زنك 8%',e:'Zink 8%',d:'يعالج نقص الزنك بسرعة وفعالية، ويحسن تكوين الهرمونات وزيادة النمو.',k:[['زنك','8%'],['مخلب على أحماض أمينية','يحتوي']],u:[['رش ورقي','1 لتر / 600 لتر ماء'],['الخضروات','1 لتر / فدان']],s:sz('1LITER','500CM')},
+/* أحماض أمينية */
+{c:'amino',im:'aminoat',n:'أمينوات',e:'Amino AT',d:'مركب أحماض أمينية ينشط الإنزيمات ويحفز العمليات الحيوية ويحسن النمو العام ويقاوم الإجهاد البيئي.',k:[['أحماض أمينية','23%'],['حديد','2%'],['زنك','1.5%'],['منجنيز','0.7%'],['ماغنسيوم','0.5%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء']],s:sz('1LITER','500CM','250CM')},
+{c:'amino',im:'megax',n:'ميجا إكس',e:'Mega X',d:'تنشيط النمو ودفع النبات للتزهير والتفريع.',k:[['أحماض أمينية','10%'],['بوتاسيوم','7%'],['نيتروجين','7%'],['ماغنسيوم','0.5%'],['حديد','0.3%'],['زنك','0.1%'],['منجنيز','0.1%'],['المادة المخلبية EDTA','Ph = 6.5']],u:[['رش ورقي','1 سم³ / لتر ماء']],s:sz('250CM')},
+/* مغذيات عامة */
+{c:'gen',im:'justfeed',n:'جاست فيد',e:'Just Feed',d:'مغذي عام متكامل بتركيبة متميزة من العناصر الكبرى والصغرى والأحماض الأمينية، فعال في تنشيط النمو وزيادة كفاءة التزهير والإثمار.',k:[['نيتروجين','10%'],['فوسفور','10%'],['بوتاسيوم','10%'],['أحماض أمينية','10%'],['ستريك أسيد','5%'],['ماغنسيوم','1%'],['منجنيز','0.7%'],['سيتوكينين','0.5%'],['أوكسينات','0.5%'],['زنك','0.1%'],['بورون','0.05%']],u:[['رش ورقي','1 لتر / 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'gen',im:'magtop',n:'ماج توب',e:'Mag Top',d:'مركب نترات ماغنسيوم لتحسين التمثيل الضوئي، يعزز قوة الأوراق ويمنع الاصفرار.',k:[['نيتروجين N (أزوت)','10%'],['ماغنسيوم MgO','12.5%']],u:[['رش ورقي','1 لتر / 300 لتر ماء']],s:sz('1LITER')},
+{c:'gen',im:'joker',n:'الجوكر',e:'Joker',d:'مركب عالي الأزوت مهم لتحسين الإنبات وزيادة قوة النمو الخضري والتجذير.',a:'طحالب بحرية وأحماض أمينية',k:[['نيتروجين','18%'],['فوسفور','5%'],['بوتاسيوم','5%']],u:[['رش ورقي','1 كجم / 600 لتر ماء']],s:sz('1KG')},
+/* الفوسفور */
+{c:'phos',im:'phosford',n:'فوسفورد',e:'Phos Ford',d:'مركب فوسفور عالي يحفز نمو الجذور في المراحل الأولى وينشط التزهير والعقد.',k:[['فوسفور','70%'],['بوتاسيوم','10%']],u:[['رش ورقي','1 سم³ / لتر ماء']],s:sz('1LITER','500CM')},
+{c:'phos',im:'aderal',n:'فوسفو أديرال',e:'Phospho Aderal',f:'10-50-10',d:'يحفز النمو في بداية الموسم بفضل تركيبته الفسفورية القوية، ويزيد من سرعة الإزهار المبكر.',k:[['نيتروجين','10%'],['فوسفور','50%'],['بوتاسيوم','10%'],['بورون','1.5%'],['مولبيدنم','0.5%']],u:[['رش ورقي','1 كجم / 600 لتر ماء']],s:sz('1KG')},
+{c:'phos',im:'phosgreen',n:'فوسفو جرين بلس',e:'Phospho Green Plus',f:'13-40-13',d:'تركيبة غنية بالفوسفور والبوتاسيوم لتحسين النمو الجذري، ترفع كفاءة الإزهار وزيادة العقد.',k:[['نيتروجين','13%'],['فوسفور','40%'],['بوتاسيوم','13%'],['زنك','0.1%'],['حديد','0.1%'],['منجنيز','0.1%']],u:[['رش ورقي','1 كجم / 600 لتر ماء']],s:sz('1KG')},
+/* كالسيوم */
+{c:'calc',im:'calpure',n:'كال بيور',e:'Cal Pure',d:'كالسيوم نقي لزيادة صلابة الثمار ومنع القشب والتشقق، يمتص بسهولة لنتائج أسرع.',a:'أحماض أمينية حرة',k:[['كالسيوم','16%'],['بورون','2%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'calc',im:'calford',n:'كال فورد',e:'Cal Ford',d:'تركيبة متوازنة من الكالسيوم والماغنسيوم والبورون لدعم نمو الأنسجة الحديثة والقمم النامية، وتحسين جودة الثمار وتقوية جذر النبات.',k:[['كالسيوم','16%'],['ماغنسيوم','5%'],['بورون','1%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء'],['تسميد أرضي','2 - 3 لتر / فدان']],s:sz('1LITER')},
+{c:'calc',im:'cozaro',n:'كوزارو فورس',e:'Cozaro Force',d:'مركب كالسيوم بورون عضوي لتقوية الشتلات وتثبيت العقد وصلابة الثمار وتحسين التلقيح والإخصاب.',k:[['أسيتات كالسيوم','26%'],['بورون','3%'],['أسيتات زنك','2%']],u:[['رش ورقي','1 كجم / 200 لتر ماء']],s:sz('1KG','500GM')},
+{c:'calc',im:'fengaro',n:'فينجارو',e:'Fengaro',d:'مركب كبريتات كالسيوم لتدعيم النبات ورفع مناعته ضد الأمراض الفطرية.',k:[['كالسيوم','6%'],['كبريت','24%']],u:[['رش ورقي','1 لتر / 300 لتر ماء']],s:sz('1LITER')},
+/* بوتاسيوم */
+{c:'pot',im:'ktp',n:'K.T.P',d:'نسبة عالية من البوتاسيوم والفوسفور للنمو والإزهار، يحسن العقد وجودة الثمار.',k:[['بوتاسيوم','40%'],['فوسفور','30%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'pot',im:'citro',n:'ستروبو',e:'Citro PO',d:'تركيبة بوتاسيوم ستررات لرفع كفاءة الامتصاص، تعزز جودة الثمار وقوة الإنتاج.',k:[['بوتاسيوم ستررات','37.5%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'pot',im:'pps',n:'P.P.S',d:'مصدر قوي للبوتاسيوم والكبريت لتحسين جودة المحصول، يعزز المناعة ويحسن صلابة الثمار.',k:[['بوتاسيوم','33%'],['كبريت','23%']],u:[['رش ورقي','1 لتر / 400 - 600 لتر ماء']],s:sz('1LITER','5LITER')},
+{c:'pot',im:'organo',n:'اورجانو فورس',e:'Organo Force',d:'مركب أسيتات وسترات بوتاسيوم عضوي فعال في رفع كفاءة عملية التحجيم وتحسين جودة الثمار ورفع مقاومة النبات ضد ظروف الإجهاد.',k:[['أسيتات - سترات بوتاسيوم','50%']],u:[['ري تنقيط','1 - 1.5 لتر / فدان'],['ري غمر','2 لتر / فدان'],['رش ورقي','0.5 لتر / 100 لتر ماء']],s:sz('1LITER')},
+{c:'pot',im:'curemax',n:'كيور ماكس',e:'Cure Max',d:'مركب بوتاسيوم فوسفور مهم في مرحلتي التزهير والإثمار.',k:[['بوتاسيوم','24%'],['فوسفور','17.5%'],['أحماض أمينية','7.63%']],u:[['رش ورقي','1 لتر / 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'pot',im:'cidosilica',n:'سيدوسيليكا',e:'Cidosilica',d:'يحتوي على السيليكا لزيادة صلابة الأنسجة ومقاومة الأمراض، ويحسن تحمل النبات للظروف الصعبة.',k:[['بوتاسيوم K2O','12%'],['سيليكون SiO2','25%']],u:[['رش ورقي','5 - 8 سم³ / لتر ماء']],s:sz('1LITER')},
+/* نترات */
+{c:'nit',im:'potak',n:'بوتاكيه',e:'Pota-K',d:'مركب نترات بوتاسيوم لتحسين حجم الثمار وصلابتها، يساعد على زيادة الإنتاجية وتحسين الصفات التسويقية.',k:[['بوتاسيوم','15%'],['نيتروجين','5%'],['ماغنسيوم','1%'],['بورون','PPM 2000']],u:[['ري تنقيط','3 لتر / فدان'],['ري غمر','5 - 7 لتر / فدان']],s:sz('5LITER','20LITER')},
+{c:'nit',im:'action',n:'أكشن نترات كالسيوم سائل',e:'Action',d:'تركيبة فعالة من نترات الكالسيوم لزيادة صلابة الثمار وتقليل التشققات، ترفع جودة المحصول وتحسن التخزين.',k:[['كالسيوم','16%'],['نيتروجين','13%'],['بورون','2%']],u:[['تسميد','5 لتر / فدان']],s:sz('5LITER','20LITER')},
+/* منشطات الجذور */
+{c:'root',im:'humogold',n:'هيمو جولد',e:'Humo Gold',d:'نسبة عالية من الأحماض الهيوميك والفولفيك لتحسين خصوبة التربة وتنشيط الجذور ورفع قدرة النبات على الامتصاص.',k:[['هيوميك أسيد','75%'],['فولفيك أسيد','15%'],['بوتاسيوم','10%']],u:[['تسميد','1 كجم / فدان']],s:sz('1KG','5KG')},
+{c:'root',im:'fulvo',n:'فولفو أسيد',e:'Fulvo Acid',d:'غني بحمض الفولفيك لتحسين امتصاص العناصر المغذية، يرفع جاهزية السماد ويزيد نشاط التربة.',k:[['فولفيك أسيد','70%'],['فولفات بوتاسيوم','20%'],['أحماض أمينية','10%']],u:[['تسميد','1 كجم / فدان']],s:sz('1KG','5KG')},
+{c:'root',im:'grandindole',n:'جراند اندول',e:'Grand Indole',d:'يحتوي على إندول بيوتريك أسيد لتحفيز نمو الجذور بقوة، يعزز تجذير الشتلات وزيادة قدرتها على الامتصاص.',k:[['إندول بيوتريك أسيد','4%']],u:[['تسميد','100 جم / فدان']],s:sz('100GM')},
+{c:'root',im:'rootfert',n:'روت فيرت',e:'Root Fert',d:'منشط جذور قوي بتركيبة من الأحماض الأمينية والعناصر الصغرى لدعم نمو الجذور، يساعد في تقوية النباتات تحت الظروف الصعبة.',k:[['أحماض أمينية','13%'],['فوسفور','10%'],['حديد','3%'],['إندول بيوتريك أسيد','3%'],['زنك','2%'],['منجنيز','1.5%'],['ماغنسيوم','0.5%']],u:[['تسميد','1 - 2 لتر / فدان']],s:sz('5LITER','1LITER','500CM')},
+{c:'root',im:'dejapower',n:'ديجا باور X',e:'Deja Power X',d:'منشط نمو فعال للمجموع الخضري، يساعد في تقوية النبات لبناء هيكل صحي سليم وبالتالي تحسين وزيادة الإنتاج.',a:'مضادات الإجهاد ومنظمات النمو',k:[['نيتروجين','15%'],['أحماض أمينية','10%'],['حامض هيوميك','5%'],['حامض فولفيك','2%'],['حديد','1%'],['زنك','0.5%'],['منجنيز','0.5%'],['إندول','0.5%']],u:[['تسميد أرضي','10 لتر / فدان']],s:sz('10LITER')},
+/* تزهير */
+{c:'flow',im:'pgr',n:'PGR',d:'خليط من الأحماض الأمينية ومنظمات النمو تعمل على زيادة وسرعة التجذير والامتصاص الفعال للعناصر.',k:[['مواد محفزة للنمو','15%'],['نفثيل أستيك أسيد','1.5%'],['أحماض أمينية','يحتوي']],u:[['رش ورقي','100 سم³ / 100 لتر ماء']],s:sz('100CM')},
+{c:'flow',im:'setingx',n:'سيتينج X',e:'Seting-X',d:'منظمات نمو هدفها تجذير العقل ومنع تساقط العقد والأزهار.',k:[['نفثالين أستيك أسيد','1.55%'],['نفثالين أسيتاميد','0.53%']],u:[['رش ورقي','60 جم / 100 لتر ماء']],s:sz('120GM')},
+{c:'flow',im:'gabryl',n:'جبري جروث سائل',e:'Gabry Growth',d:'منظم نمو يعمل على كسر طور السكون وتحفيز الإنبات واستطالة النبات وتحسين التزهير والإثمار.',k:[['جبريليك أسيد','10%']],u:[],s:sz('100CM')},
+{c:'flow',im:'gabryp',n:'جبري جروث بودر',e:'Gabry Growth',d:'منظم نمو يعمل على كسر طور السكون وتحفيز الإنبات واستطالة النبات وتحسين التزهير والإثمار.',k:[['جبريليك أسيد','10%']],u:[],s:sz('10GM')},
+{c:'flow',im:'melga',n:'ميلجا سيتوفري',e:'Melga',d:'مركب يحتوي على منظمات نمو لتحفيز الجذور ومنع تساقط الأزهار والتقسمات واستطالة النبات.',k:[['سيتوكينين','1.55%'],['أوكسينات','0.53%']],u:[['رش ورقي','100 سم³ / 600 لتر ماء']],s:sz('100CM','50CM')},
+{c:'flow',im:'activepower',n:'أكتف باور',e:'Active Power',d:'أحماض أمينية مع عناصر كبرى ومنظمات نمو، فعال في زيادة وتحسين النمو الخضري وتحفيز الإنبات.',k:[['أحماض أمينية','20%'],['نيتروجين','5%'],['بوتاسيوم','5%'],['فوسفور','5%'],['ماغنسيوم','2%'],['سيتوكينين','1%'],['مولبيدنم','0.03%']],u:[['رش ورقي','100 سم³ / 200 لتر ماء']],s:sz('100CM')},
+{c:'flow',im:'microfalcon',n:'ميكرو فالكون',e:'Micro Falcon',d:'غني بالحديد والزنك لتحسين قوة النبات، يعالج الاصفرار ويحفز النمو السريع ويدفع النبات للتزهير.',k:[['أحماض أمينية حرة','15.84%'],['حديد','4%'],['زنك','3%'],['منجنيز','2%'],['ماغنسيوم','1%'],['نفثيل أستيك أسيد','0.5%']],u:[['رش ورقي','100 جم / 100 لتر ماء']],s:sz('100GM')},
+{c:'flow',im:'rozan',n:'روزا-إن',e:'Roza-N',d:'منظم نمو قوي يساهم في تحسين إنتاجية النبات وتحسين العقد وزيادة نسبة مقاومته للإجهاد.',k:[['صوديوم نيتروفينولات','1.8%']],u:[['رش ورقي','50 - 100 سم³ / 100 لتر ماء']],s:sz('100CM')},
+{c:'flow',im:'borofast',n:'بورو فاست',e:'Boro Fast',d:'مزيج من البورون والمولبيدنم لرفع كفاءة التلقيح والعقد، يساعد على تقليل سقوط الأزهار وزيادة قوة الإزهار.',k:[['بورون سائل','15%'],['مولبيدنم','1%']],u:[['رش','500 سم³ / فدان']],s:sz('1LITER','500CM','100CM')},
+/* طحالب */
+{c:'algae',im:'algaveta',n:'ألجا فيتا',e:'Alga Veta',d:'مستخلص طحالب وبوتاسيوم مسؤول عن رفع مناعة النبات ومقاومته للإجهاد البيئي.',k:[['بوتاسيوم','20%'],['طحالب بحرية سائلة','يحتوي']],u:[['رش ورقي','1 لتر / 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'algae',im:'megan',n:'ميجان',e:'Megan',d:'تركيبة غنية بألجينات البوتاسيوم تدعم حيوية النبات وتعزز قدرته على التعامل مع الظروف البيئية المختلفة.',k:[['ألجينات البوتاسيوم','16%']],u:[['رش ورقي','½ جم / لتر ماء']],s:sz('100GM')},
+/* ملوحة */
+{c:'sal',im:'supersal',n:'سوبر سال',e:'Super Sal',d:'لعلاج ملوحة التربة بفعالية عالية، يساعد النبات على الامتصاص تحت ظروف الملوحة ويستعيد نموه الطبيعي.',k:SAL,u:[['تسميد','2.5 لتر / فدان']],s:sz('5LITER','20LITER')},
+{c:'sal',im:'salstop',n:'سال ستوب',e:'Sal Stop',d:'تركيبة متكاملة من الأحماض الكربوكسيلية والبوتاسيوم والكالسيوم والنيتروجين تساعد النبات على تحمل ظروف الإجهاد الملحي.',k:[['أحماض كربوكسيلية','51.74%'],['بوتاسيوم','15%'],['أكسيد الكالسيوم','14%'],['نيتروجين كلي','4%']],u:[['ري تنقيط','½ - 1 كجم / فدان'],['ري غمر','1 - 2 كجم / فدان']],s:sz('1KG','5KG')},
+{c:'sal',im:'salforce',n:'سال فورس',e:'Sal Force',d:'لعلاج ملوحة التربة بفعالية عالية، يساعد النبات على الامتصاص تحت ظروف الملوحة ويستعيد نموه الطبيعي.',k:SAL,u:[['تسميد','2.5 لتر / فدان']],s:sz('5LITER','20LITER')},
+/* نحاسية */
+{c:'cu',im:'maxcopper',n:'ماكس كوبر',e:'Max Copper',d:'سماد نحاس وكبريت عالي التركيز يقوي مناعة النبات، وأيضاً مركب وقائي من الدرجة الأولى يحمي من الإصابات الفطرية.',k:[['نحاس','10%'],['كبريت','5.2%']],u:[['تسميد أرضي','2 لتر / فدان'],['رش ورقي','1 لتر / 600 لتر ماء']],s:sz('1LITER','500CM')},
+{c:'cu',im:'cuforco',n:'سي يو فورس',e:'Cu-Forco',d:'مبيد فطري وقائي وعلاجي ضد العديد من الأمراض الفطرية والبكتيرية، ويستخدم في تطهير سطح النبات بعد التقليم أو الجروح.',x:['قابلية الخلط: لا يفضل الخلط مع أي مركب آخر'],k:[['جلوكونات نحاس','5%']],u:[['رش ورقي','1.5 - 2 سم³ / لتر ماء'],['حقن في التربة','1.5 - 2.5 لتر / فدان']],s:sz('1LITER')},
+{c:'cu',im:'mancoppral',n:'مانكوبرال',e:'Mancoppral',d:'مركب نحاس قوي في حماية النبات من الأمراض بفاعلية عنصر النحاس، ويقضي على الإصابات في بدايتها.',k:[['أوكسي كلور نحاس','30%'],['كوبر بروبيت','32%'],['كبريت ميكروني','10%'],['بورون','5%'],['زنك بروبيت','4.5%'],['منجنيز بروبيت','4.5%']],u:[['رش ورقي','750 جم / 300 لتر ماء']],s:sz('750GM')},
+{c:'cu',im:'capron',n:'كبرون',e:'Capron 15%',d:'نحاس مخلبي عالي الكفاءة مصمم لتوفير النحاس في صورة تساعد على تحسين ودعم أنظمة الدفاع داخل النبات.',k:[['نحاس مخلبي','15%'],['مادة مخلبة','70%']],u:[['تسميد أرضي','1 - 2 كجم / فدان'],['رش ورقي','1 كجم / 600 لتر ماء']],s:sz('1KG')},
+/* مستوردة */
+{c:'imp',im:'mildur',n:'ميلدر',e:'Mildur',d:'حل فعال ضد البياض الزغبي بتركيبة مزدوجة من أزوكسي ستروبين ودايفينوكونازول، وفعال ضد التبقعات واللفحات.',o:'منشأ أردني',k:[['أزوكسي ستروبين','20%'],['دايفينوكونازول','12.5%']],u:[['رش ورقي','200 سم³ / 400 لتر ماء']],s:sz('200CM')},
+{c:'imp',im:'cortiano',n:'كورتيانو',e:'Cortiano',d:'مبيد فطري وقائي يحتوي على 50% من المادة الفعالة كابتان، يوفر حماية كاملة للنبات من الأمراض الفطرية.',o:'منشأ هندي',x:['فترة ما قبل الحصاد (PHI): فراولة 7 أيام، طماطم 3 أيام، تفاح 7 أيام'],k:[['كابتان WP','50%']],u:[['رش ورقي','200 جم / 100 لتر ماء']],s:sz('100GM')},
+{c:'imp',im:'genex',n:'جينكس',e:'Genex',d:'مبيد فطري وقائي وعلاجي يكافح العديد من الأمراض الفطرية.',o:'منشأ هندي',k:[['مانكوزيب','64%'],['ميتالاكسيل','8%']],u:[['رش ورقي','250 جم / 100 لتر ماء']],s:sz('1KG','500GM')},
+/* حشرية */
+{c:'ins',im:'proact',n:'بروأكت',d:'مبيد حشري سريع الفعالية يقضي على الآفات من أول رشة.',o:'منشأ صيني',k:[['إيمامكتين بنزوات','5.7%']],u:[['رش ورقي','60 جم / 150 لتر ماء']],s:sz('60GM')},
+{c:'ins',im:'noflies',n:'نوفليز',e:'No Flies',d:'مبيد حشري واسع المجال ضد العديد من الحشرات التي تصيب النبات.',k:[['لمبادا سيهالوثرين','5%']],u:[['رش ورقي','1 - 1.5 سم³ / لتر ماء']],s:sz('1LITER','500CM','250CM','100CM')},
+/* نيماتودا */
+{c:'nem',im:'nematrol',n:'نيماترول',e:'Nema Trol',d:'مبيد نيماتودا بتركيبة من الزيوت النباتية الطبيعية يحمي الجذور من النيماتودا ويعزز النمو الصحي للنباتات، وآمن جداً على الصحة العامة.',k:[['زيوت نباتية طبيعية','يحتوي']],u:[['تسميد','2 لتر / فدان']],s:sz('1LITER','5LITER')}
+];
+
+var catById={};
+CATS.forEach(function(c){catById[c.id]=c});
+P.forEach(function(p,i){p.i=i;p.g=catById[p.c].g;p.cn=catById[p.c].n});
+
+var norm=function(s){return String(s||'').toLowerCase().replace(/[ً-ٟـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[٠-٩]/g,function(d){return d.charCodeAt(0)-1632});};
+P.forEach(function(p){p.hay=norm([p.n,p.e,p.f,p.d,p.cn,p.o,(p.k||[]).map(function(r){return r[0]}).join(' ')].join(' '))});
+
+var $=function(id){return document.getElementById(id)};
+var root=document.documentElement;
+var state={g:'all',q:''};
+var cart=[];
+try{var sv=localStorage.getItem('misr-cart');if(sv){cart=JSON.parse(sv).filter(function(i){return P[i]})}}catch(e){}
+var saveCart=function(){try{localStorage.setItem('misr-cart',JSON.stringify(cart))}catch(e){}};
+
+$('statProducts').textContent=P.length;
+$('statCats').textContent=CATS.length;
+
+function matches(p){
+  if(state.g!=='all'&&p.g!==state.g)return false;
+  if(!state.q)return true;
+  return state.q.split(/\s+/).every(function(t){return p.hay.indexOf(t)>-1});
+}
+function numOf(v){if(/PPM|Ph/i.test(v))return null;var n=parseFloat(v);return isNaN(n)?null:Math.min(100,n)}
+function rowHtml(r){
+  var n=numOf(r[1]);
+  return '<div class="row"><span>'+esc(r[0])+'</span><span class="v ltr">'+esc(r[1])+'</span>'+(n!==null?'<span class="bar"><i style="width:'+n+'%"></i></span>':'')+'</div>';
+}
+function img(p){return '<img src="p/'+p.im+'.webp" alt="'+esc(p.n)+'" loading="lazy" decoding="async">'}
+function sizes(p){return p.s.map(function(s){return '<span class="size">'+esc(s)+'</span>'}).join('')}
+function cardHtml(p){
+  var h='<article class="card ac-'+p.g+'" tabindex="0" role="button" data-i="'+p.i+'" aria-label="'+esc(p.n)+'">';
+  h+='<div class="plate">'+img(p)+(p.f?'<span class="badge">'+esc(p.f)+'</span>':'')+(p.o?'<span class="origin">'+esc(p.o)+'</span>':'')+'</div>';
+  h+='<div class="cbody"><div class="top"><span class="dot"></span><span>'+esc(p.cn)+'</span></div>';
+  h+='<h3>'+esc(p.n)+'</h3>';
+  if(p.e)h+='<div class="en">'+esc(p.e)+'</div>';
+  h+='<p class="desc">'+esc(p.d)+'</p>';
+  if(p.f){
+    var fm=p.f.match(/^(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)/);
+    if(fm)h+='<div class="npkline ltr">'+['N','P','K'].map(function(l,j){return '<div><b>'+fm[j+1]+'</b><small>'+l+'</small></div>'}).join('')+'</div>';
+  }else{
+    h+='<div class="rows">'+p.k.filter(function(r){return numOf(r[1])!==null}).slice(0,3).map(rowHtml).join('')+'</div>';
+  }
+  h+='<div class="foot">'+sizes(p)+'</div></div></article>';
+  return h;
+}
+function render(){
+  var out='',total=0;
+  CATS.forEach(function(c){
+    var list=P.filter(function(p){return p.c===c.id&&matches(p)});
+    if(!list.length)return;
+    total+=list.length;
+    out+='<section class="cat"><div class="cat-head"><h2>'+esc(c.n)+'</h2><span>'+list.length+' منتج</span></div><div class="grid">'+list.map(cardHtml).join('')+'</div></section>';
+  });
+  if(!total){out='<div class="empty"><b>لا توجد نتائج مطابقة</b>جرّب اسم المنتج أو اسم عنصر مثل بوتاسيوم أو كالسيوم أو حديد.</div>'}
+  $('main').innerHTML=out;
+}
+function renderTabs(){
+  $('tabs').innerHTML=GROUPS.map(function(g){
+    var n=g.id==='all'?P.length:P.filter(function(p){return p.g===g.id}).length;
+    return '<button type="button" class="tab" data-g="'+g.id+'" aria-pressed="'+(state.g===g.id)+'">'+esc(g.n)+'<small>'+n+'</small></button>';
+  }).join('');
+}
+function renderTiles(){
+  $('tiles').innerHTML=GROUPS.filter(function(g){return g.id!=='all'}).map(function(g){
+    var n=P.filter(function(p){return p.g===g.id}).length;
+    var nc=CATS.filter(function(c){return c.g===g.id}).length;
+    return '<button type="button" class="tile ac-'+g.id+'" data-g="'+g.id+'"><span class="collage">'+g.col.map(function(k){return '<img src="p/'+k+'.webp" alt="" loading="lazy" decoding="async">'}).join('')+'</span><h3>'+esc(g.n)+'</h3><p>'+esc(g.d)+'</p><span class="n">'+n+' منتج في '+nc+' تصنيفات</span></button>';
+  }).join('');
+}
+function setGroup(g){
+  state.g=g;renderTabs();render();
+}
+function goTo(el,offset){
+  if(!el)return;
+  var y=el.getBoundingClientRect().top+window.pageYOffset-(offset||0);
+  window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+}
+
+/* overlays */
+var ov=$('ov'),lastFocus=null;
+function openOv(html){
+  lastFocus=document.activeElement;
+  ov.innerHTML=html;ov.hidden=false;document.body.style.overflow='hidden';
+  var x=ov.querySelector('.x');if(x)x.focus();
+}
+function closeOv(){
+  ov.hidden=true;ov.innerHTML='';document.body.style.overflow='';
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus()}catch(e){}}
+}
+function detail(i){
+  var p=P[i],inCart=cart.indexOf(i)>-1;
+  var h='<div class="sheet ac-'+p.g+'" role="dialog" aria-modal="true" aria-label="'+esc(p.n)+'">';
+  h+='<button class="x" type="button" data-close aria-label="إغلاق">×</button>';
+  h+='<div class="plate-big">'+img(p).replace(' loading="lazy"','')+'</div><div class="info">';
+  h+='<div class="meta"><span class="dot"></span><span>'+esc(p.cn)+'</span>'+(p.o?'<span>· '+esc(p.o)+'</span>':'')+'</div>';
+  h+='<div><h2>'+esc(p.n)+'</h2>'+(p.e?'<div class="en">'+esc(p.e)+'</div>':'')+'</div>';
+  if(p.f)h+='<div class="bigf">'+esc(p.f)+'</div>';
+  h+='<p class="lead">'+esc(p.d)+'</p>';
+  if(p.t)h+='<div class="foot">'+p.t.map(function(t){return '<span class="size">'+esc(t)+'</span>'}).join('')+'</div>';
+  h+='<h4>التركيب</h4><div class="tbl">'+p.k.map(function(r){
+    var n=numOf(r[1]);
+    return '<div class="tr"><span>'+esc(r[0])+'</span><span class="v">'+esc(r[1])+'</span>'+(n!==null?'<span class="bar" style="grid-column:1/-1"><i style="width:'+n+'%"></i></span>':'')+'</div>';
+  }).join('')+'</div>';
+  if(p.a)h+='<div class="notes"><span>إضافات: '+esc(p.a)+'</span></div>';
+  if(p.u&&p.u.length){
+    h+='<h4>معدلات الاستخدام</h4><div class="tbl">'+p.u.map(function(r){return '<div class="tr"><span>'+esc(r[0])+'</span><span class="v" style="direction:rtl">'+esc(r[1])+'</span></div>'}).join('')+'</div>';
+  }
+  if(p.x&&p.x.length)h+='<div class="notes">'+p.x.map(function(t){return '<span>'+esc(t)+'</span>'}).join('')+'</div>';
+  h+='<h4>العبوات المتاحة</h4><div class="foot">'+sizes(p)+'</div>';
+  h+='<div class="actions"><button class="btn" type="button" data-cart="'+i+'">'+(inCart?'إزالة من قائمة الاستفسار':'أضف إلى قائمة الاستفسار')+'</button><button class="btn ghost" type="button" data-close>إغلاق</button></div>';
+  openOv(h+'</div></div>');
+}
+function quoteText(){
+  var lines=['استفسار عن منتجات مصر الدولية:',''];
+  cart.forEach(function(i){var p=P[i];lines.push('- '+p.n+' ('+p.s.join(' / ')+')')});
+  lines.push('','برجاء التواصل لتأكيد الأسعار والتوافر.');
+  return lines.join('\n');
+}
+function quote(){
+  var h='<div class="sheet narrow" role="dialog" aria-modal="true" aria-label="قائمة الاستفسار">';
+  h+='<button class="x" type="button" data-close aria-label="إغلاق">×</button><div class="info"><h2 style="padding-inline-start:46px">قائمة الاستفسار</h2>';
+  if(!cart.length){
+    h+='<p class="lead">القائمة فارغة. افتح أي منتج واضغط «أضف إلى قائمة الاستفسار».</p>';
+  }else{
+    h+='<div class="qlist">'+cart.map(function(i){return '<div class="qitem"><span>'+esc(P[i].n)+' <small>'+esc(P[i].s.join(' / '))+'</small></span><button type="button" data-rm="'+i+'" aria-label="حذف '+esc(P[i].n)+'">×</button></div>'}).join('')+'</div>';
+    h+='<textarea id="qtext" readonly aria-label="نص الاستفسار">'+esc(quoteText())+'</textarea>';
+    h+='<div class="actions"><button class="btn" type="button" id="copyQ">نسخ القائمة</button><button class="btn ghost" type="button" id="clearQ">مسح القائمة</button></div>';
+    h+='<div class="hint" id="qhint">انسخ القائمة وأرسلها عبر البريد a3.misr.eldawlya@gmail.com أو اتصل على +2 048 25 90 903.</div>';
+  }
+  openOv(h+'</div></div>');
+}
+function syncFab(){$('fab').hidden=!cart.length;$('fabN').textContent=cart.length}
+function toggleCart(i){
+  var k=cart.indexOf(i);
+  if(k>-1)cart.splice(k,1);else cart.push(i);
+  saveCart();syncFab();
+}
+function curTheme(){
+  var t=root.getAttribute('data-theme');if(t)return t;
+  return (window.matchMedia&&window.matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark';
+}
+
+/* events */
+$('q').addEventListener('input',function(e){state.q=norm(e.target.value).trim();render()});
+$('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('.tab');if(!b)return;
+  setGroup(b.getAttribute('data-g'));
+  var tb=$('toolbar');
+  if(window.pageYOffset>tb.offsetTop)goTo($('main'),tb.offsetHeight+8);
+});
+$('tiles').addEventListener('click',function(e){
+  var b=e.target.closest('.tile');if(!b)return;
+  setGroup(b.getAttribute('data-g'));
+  goTo($('toolbar'),0);
+});
+document.addEventListener('click',function(e){
+  var a=e.target.closest('[data-go]');
+  if(a){e.preventDefault();var id=a.getAttribute('data-go');goTo($(id),id==='main'?$('toolbar').offsetHeight+8:0)}
+});
+$('theme').addEventListener('click',function(){root.setAttribute('data-theme',curTheme()==='dark'?'light':'dark')});
+$('toTop').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
+$('main').addEventListener('click',function(e){var c=e.target.closest('.card');if(c)detail(+c.getAttribute('data-i'))});
+$('main').addEventListener('keydown',function(e){
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  var c=e.target.closest('.card');if(c){e.preventDefault();detail(+c.getAttribute('data-i'))}
+});
+ov.addEventListener('click',function(e){
+  if(e.target===ov||e.target.closest('[data-close]')){closeOv();return}
+  var a=e.target.closest('[data-cart]');
+  if(a){toggleCart(+a.getAttribute('data-cart'));detail(+a.getAttribute('data-cart'));return}
+  var r=e.target.closest('[data-rm]');
+  if(r){toggleCart(+r.getAttribute('data-rm'));quote();return}
+  if(e.target.id==='clearQ'){cart=[];saveCart();syncFab();quote();return}
+  if(e.target.id==='copyQ'){
+    var t=$('qtext'),hint=$('qhint');
+    var fallback=function(){t.focus();t.select();hint.textContent='حدد النص وانسخه يدوياً.'};
+    try{
+      navigator.clipboard.writeText(t.value).then(function(){hint.textContent='تم نسخ القائمة.'},fallback);
+    }catch(err){fallback()}
+  }
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!ov.hidden)closeOv()});
+$('fab').addEventListener('click',quote);
+
+renderTabs();renderTiles();render();syncFab();
+})();
+</script>
+
+</body></html>
